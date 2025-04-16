@@ -196,18 +196,19 @@
     toggleMenu();
   }
 
-  // ✅ 스와이프 감지 + 확대 상태 검사 추가
+  // ✅ 스와이프 감지 + 확대 상태 추적
   let startX = 0;
   let endX = 0;
+  let isZoomed = false;
 
   document.addEventListener('touchstart', (e) => {
-    // 화면이 확대되어 있을 경우 → 스와이프 무시
-    if (window.visualViewport && window.visualViewport.scale > 1) return;
+    isZoomed = window.visualViewport && window.visualViewport.scale > 1;
+    if (isZoomed) return;  // 확대 중이면 시작 좌표 저장 안함
     startX = e.touches[0].clientX;
   });
 
   document.addEventListener('touchend', (e) => {
-    if (window.visualViewport && window.visualViewport.scale > 1) return;
+    if (isZoomed) return;  // 확대 중이었던 경우는 스와이프 건너뜀
     endX = e.changedTouches[0].clientX;
     handleSwipe();
   });
@@ -216,13 +217,14 @@
     const delta = endX - startX;
     if (Math.abs(delta) > 50) {
       if (delta < 0) {
-        changeSlide(1); // 오른쪽 스와이프 → 다음 슬라이드
+        changeSlide(1);
       } else {
-        changeSlide(-1); // 왼쪽 스와이프 → 이전 슬라이드
+        changeSlide(-1);
       }
     }
   }
 </script>
+
 
 
 
