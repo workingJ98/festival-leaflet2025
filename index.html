@@ -90,10 +90,10 @@
 <body>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <div class="menu-list" id="menuList">
-    <button onclick="goToSlide(1)">🎪 축제 소개</button>
-    <button onclick="goToSlide(3)">🎭 공연 정보</button>
-    <button onclick="goToSlide(22)">🗓️ 일정표</button>
-    <button onclick="goToSlide(25)">🗺️ 지도</button>
+    <button onclick="goToSlideInstant(1)">🎪 축제 소개</button>
+    <button onclick="goToSlideInstant(3)">🎭 공연 정보</button>
+    <button onclick="goToSlideInstant(22)">🗓️ 일정표</button>
+    <button onclick="goToSlideInstant(25)">🗺️ 지도</button>
   </div>
 
   <div class="slider-container">
@@ -137,7 +137,6 @@
     const totalSlides = slides.length;
     let current = 0;
 
-    // 슬라이드 개수에 맞춰 wrapper 너비 설정
     slidesWrapper.style.width = `${totalSlides * 100}vw`;
 
     function updateSlide() {
@@ -145,6 +144,7 @@
     }
 
     function changeSlide(direction) {
+      slidesWrapper.style.transition = 'transform 0.5s ease';
       current += direction;
       if (current < 0) current = 0;
       if (current >= totalSlides) current = totalSlides - 1;
@@ -155,9 +155,14 @@
       document.getElementById('menuList').classList.toggle('show');
     }
 
-    function goToSlide(index) {
+    function goToSlideInstant(index) {
+      slidesWrapper.style.transition = 'none';
       current = index;
       updateSlide();
+      // 트랜지션 원래대로 복구
+      requestAnimationFrame(() => {
+        slidesWrapper.style.transition = 'transform 0.5s ease';
+      });
       document.getElementById('menuList').classList.remove('show');
     }
 
