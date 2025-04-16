@@ -196,19 +196,19 @@
     toggleMenu();
   }
 
-  // ✅ 스와이프 감지 + 확대 상태 추적
+  // ✅ 스와이프 + 핀치줌 감지
   let startX = 0;
   let endX = 0;
-  let isZoomed = false;
+  let isMultiTouch = false;
 
   document.addEventListener('touchstart', (e) => {
-    isZoomed = window.visualViewport && window.visualViewport.scale > 1;
-    if (isZoomed) return;  // 확대 중이면 시작 좌표 저장 안함
+    isMultiTouch = e.touches.length > 1; // 두 손가락 이상이면 확대용 터치로 판단
+    if (isMultiTouch) return;
     startX = e.touches[0].clientX;
   });
 
   document.addEventListener('touchend', (e) => {
-    if (isZoomed) return;  // 확대 중이었던 경우는 스와이프 건너뜀
+    if (isMultiTouch) return;
     endX = e.changedTouches[0].clientX;
     handleSwipe();
   });
@@ -224,6 +224,7 @@
     }
   }
 </script>
+
 
 
 
