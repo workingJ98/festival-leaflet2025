@@ -98,8 +98,33 @@
 
   <div class="slider-container">
     <div class="slides-wrapper" id="slidesWrapper">
-      <!-- 슬라이드 이미지 전체 순서대로 나열 -->
-      <!-- 이미지 목록은 생략합니다 -->
+      <div class="slide"><img src="main poster.jpg" alt="메인 포스터"></div>
+      <div class="slide"><img src="festinfo1.jpg" alt="축제 정보 1"></div>
+      <div class="slide"><img src="festinfo2.jpg" alt="축제 정보 2"></div>
+      <div class="slide"><img src="info1.jpg" alt="공연 소개 1"></div>
+      <div class="slide"><img src="info2.jpg" alt="공연 소개 2"></div>
+      <div class="slide"><img src="info3.jpg" alt="공연 소개 3"></div>
+      <div class="slide"><img src="info4.jpg" alt="공연 소개 4"></div>
+      <div class="slide"><img src="info5.jpg" alt="공연 소개 5"></div>
+      <div class="slide"><img src="info6.jpg" alt="공연 소개 6"></div>
+      <div class="slide"><img src="info7.jpg" alt="공연 소개 7"></div>
+      <div class="slide"><img src="info8.jpg" alt="공연 소개 8"></div>
+      <div class="slide"><img src="info9.jpg" alt="공연 소개 9"></div>
+      <div class="slide"><img src="info10.jpg" alt="공연 소개 10"></div>
+      <div class="slide"><img src="info11.jpg" alt="공연 소개 11"></div>
+      <div class="slide"><img src="info12.jpg" alt="공연 소개 12"></div>
+      <div class="slide"><img src="info13.jpg" alt="공연 소개 13"></div>
+      <div class="slide"><img src="info14.jpg" alt="공연 소개 14"></div>
+      <div class="slide"><img src="info15.jpg" alt="공연 소개 15"></div>
+      <div class="slide"><img src="info16.jpg" alt="공연 소개 16"></div>
+      <div class="slide"><img src="info17.jpg" alt="공연 소개 17"></div>
+      <div class="slide"><img src="info18.jpg" alt="공연 소개 18"></div>
+      <div class="slide"><img src="program.jpg" alt="공연 프로그램"></div>
+      <div class="slide"><img src="timetable53.jpg" alt="일정표 1"></div>
+      <div class="slide"><img src="timetable54.jpg" alt="일정표 2"></div>
+      <div class="slide"><img src="timetable55.jpg" alt="일정표 3"></div>
+      <div class="slide"><img src="map1.jpg" alt="지도 1"></div>
+      <div class="slide"><img src="map2.jpg" alt="지도 2"></div>
     </div>
     <button class="nav-btn prev-btn" onclick="changeSlide(-1)">◀</button>
     <button class="nav-btn next-btn" onclick="changeSlide(1)">▶</button>
@@ -130,7 +155,6 @@
     }
 
     function goToSlideInstant(index) {
-      // 즉시 전환을 위해 트랜지션 제거 후 강제로 다시 설정
       slidesWrapper.style.transition = 'none';
       current = index;
       updateSlide();
