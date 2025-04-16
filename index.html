@@ -9,8 +9,8 @@
    body {
   font-family: sans-serif;
   background: #000;
-  overflow: hidden;            /* 🔒 스크롤 차단 */
-  touch-action: pan-y;         /* 👉 수직 스크롤만 허용 (필요 시) */
+  overflow: hidden;              /* 🔒 스크롤 방지 */
+  touch-action: pan-y pinch-zoom; /* ✅ 세로스크롤 & 확대 허용 */
 }
 
 .slider-container {
@@ -20,9 +20,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;           /* 🔒 내부 스크롤도 차단 */
-  touch-action: none;         /* 👉 스와이프만 감지하고 스크롤은 막음 */
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom; /* ✅ 확대 허용하면서 스와이프도 정상 작동 */
 }
+
 
 
     .slide {
