@@ -196,19 +196,24 @@
     toggleMenu();
   }
 
-  // ✅ 스와이프 + 핀치줌 감지
+  // ✅ 스와이프 + 핀치 줌 완벽 차단 로직
   let startX = 0;
   let endX = 0;
-  let isMultiTouch = false;
+  let isPinchZoom = false;
 
   document.addEventListener('touchstart', (e) => {
-    isMultiTouch = e.touches.length > 1; // 두 손가락 이상이면 확대용 터치로 판단
-    if (isMultiTouch) return;
+    if (e.touches.length > 1) {
+      isPinchZoom = true; // 두 손가락 이상 → 확대 동작으로 간주
+      return;
+    }
+    isPinchZoom = false;
     startX = e.touches[0].clientX;
   });
 
   document.addEventListener('touchend', (e) => {
-    if (isMultiTouch) return;
+    if (isPinchZoom) return; // ✅ 이전에 멀티터치였으면 무조건 스와이프 차단
+    if (e.changedTouches.length > 1) return; // 두 손가락 동시에 뗀 경우도 무시
+
     endX = e.changedTouches[0].clientX;
     handleSwipe();
   });
@@ -224,6 +229,7 @@
     }
   }
 </script>
+
 
 
 
