@@ -196,39 +196,37 @@
     toggleMenu();
   }
 
-  // ✅ 스와이프 + 핀치 줌 완벽 차단 로직
-  let startX = 0;
-  let endX = 0;
-  let isPinchZoom = false;
+  // ✅ 스와이프 각도 판별용 좌표 저장
+  let startX = 0, startY = 0;
+  let endX = 0, endY = 0;
 
   document.addEventListener('touchstart', (e) => {
-    if (e.touches.length > 1) {
-      isPinchZoom = true; // 두 손가락 이상 → 확대 동작으로 간주
-      return;
-    }
-    isPinchZoom = false;
+    if (e.touches.length > 1) return; // 두 손가락 이상 → 핀치줌, 스와이프 무시
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
   });
 
   document.addEventListener('touchend', (e) => {
-    if (isPinchZoom) return; // ✅ 이전에 멀티터치였으면 무조건 스와이프 차단
-    if (e.changedTouches.length > 1) return; // 두 손가락 동시에 뗀 경우도 무시
+    if (e.changedTouches.length > 1) return;
 
     endX = e.changedTouches[0].clientX;
-    handleSwipe();
-  });
+    endY = e.changedTouches[0].clientY;
 
-  function handleSwipe() {
-    const delta = endX - startX;
-    if (Math.abs(delta) > 50) {
-      if (delta < 0) {
-        changeSlide(1);
+    const deltaX = endX - startX;
+    const deltaY = endY - startY;
+    const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI); // 각도 계산
+
+    // ✅ 수평에 가까운 각도만 허용 (15도 이내)
+    if (Math.abs(deltaX) > 50 && (angle < 15 || angle > 165)) {
+      if (deltaX < 0) {
+        changeSlide(1); // 오른쪽으로 넘김
       } else {
-        changeSlide(-1);
+        changeSlide(-1); // 왼쪽으로 넘김
       }
     }
-  }
+  });
 </script>
+
 
 
 
